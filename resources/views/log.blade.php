@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@section('styles')
+    <link href="{{ asset('plugins\daterangepicker\daterangepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins\select2\dist\css\select2.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins\select2\dist\css\select2-bootstrap.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -7,7 +11,19 @@
             <div class="card">
                 <div class="card-header">Temperature Logs</div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <form action="" class="form-inline">
+                        @csrf
+                        <input type="text" name="period" class="form-control form-control-sm mr-3 mt-2" style="min-width: 210px;" autocomplete="off" id="period" value="{{$period}}" placeholder="Select Date">
+                        <select name="employee_id" id="search_employee" class="form-control form-control-sm mt-2">
+                            <option value="">Select Employee</option>
+                            @foreach ($employees as $item)
+                                <option value="{{$item->id}}" @if($item->id == $employee_id) selected @endif>{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm mt-2 ml-2">Search</button>
+                        <button type="button" id="btn_reset" class="btn btn-sm btn-danger mt-2 ml-2">Reset</button>
+                    </form>
+                    <div class="table-responsive mt-2">
                         <table class="table table-bordered">
                             <thead>
                                 <th>No</th>
@@ -35,7 +51,7 @@
                             <div class="float-right" style="margin: 0;">
                                 {!! $data->appends([
                                     'employee_id' => $employee_id,
-                                    'date' => $date,
+                                    'period' => $period,
                                 ])->links() !!}
                             </div>
                         </div>
@@ -45,4 +61,20 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="{{asset('plugins\daterangepicker\jquery.daterangepicker.min.js')}}"></script>
+    <script src="{{asset('plugins\select2\dist\js\select2.min.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#period").dateRangePicker({
+                autoClose: false,
+            });
+            $("#btn_reset").click(function () {
+                $("#period").val('');
+                $("#search_employee").val('');
+            })
+        });
+    </script>
 @endsection

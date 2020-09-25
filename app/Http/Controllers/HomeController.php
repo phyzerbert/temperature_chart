@@ -63,16 +63,19 @@ class HomeController extends Controller
 
     public function logs(Request $request) {
         $mod = new Temperature();
-        $date = $employee_id = '';
-        if($request->get('date') != '') {
-            $date = $request->get('date');
-            $mod = $mod->whereDate('datetime', $date);
+        $employees = Employee::orderBy('name')->get();
+        $period = $employee_id = '';
+        if($request->get('period') != '') {
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('datetime', [$from, $to]);
         }
         if($request->get('employee_id') != '') {
             $employee_id = $request->get('employee_id');
             $mod = $mod->where('employee_id', $employee_id);
         }
         $data = $mod->orderBy('datetime', 'desc')->paginate(15);
-        return view('log', compact('data', 'date', 'employee_id'));
+        return view('log', compact('data', 'employees', 'period', 'employee_id'));
     }
 }

@@ -64,7 +64,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="javascript:;" class="dropdown-item" id="btn_change_theme">Dark Theme</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -83,6 +82,9 @@
         </nav>
 
         <main class="py-4">
+            <div class="change-theme">
+                <button class="btn btn-sm btn-primary" id="btn_change_theme">Dark</button>
+            </div>
             @yield('content')
         </main>
     </div>
@@ -108,10 +110,10 @@
                 let theme = localStorage.getItem("theme"); 
                 if(theme == 'dark') {
                     $("body").removeClass("bootstrap").addClass('bootstrap-dark');
-                    $("#btn_change_theme").text('Light Theme');
+                    $("#btn_change_theme").text('Light');
                 } else {
                     $("body").removeClass("bootstrap-dark").addClass('bootstrap');
-                    $("#btn_change_theme").text('Dark Theme');
+                    $("#btn_change_theme").text('Dark');
                 }
             }
         })

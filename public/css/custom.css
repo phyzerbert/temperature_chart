@@ -15,6 +15,12 @@
   min-height: 36px !important;
 }
 
+#btn_change_theme {
+  position: fixed;
+  right: -3px;
+  top: 120px;
+}
+
 .bootstrap-dark .reportrange-text {
   background: #191d21 !important;
 }
@@ -27,6 +33,7 @@
 .bootstrap-dark .multiselect__input,
 .bootstrap-dark .multiselect__single,
 .bootstrap-dark .multiselect__content-wrapper {
+  color: #dee2e6 !important;
   background: #191d21 !important;
 }
 

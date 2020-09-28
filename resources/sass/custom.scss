@@ -11,3 +11,48 @@
         min-height: 36px !important;
     }
 }
+.bootstrap-dark {
+    .reportrange-text {
+        background: #191d21 !important;
+    }
+    .multiselect {
+        color: #dee2e6 !important;
+        &__tags, &__input, &__single, &__content-wrapper {
+            background: #191d21 !important;
+        }
+    }
+
+    .select2-container--default .select2-selection--single{
+        background-color: #191d21;
+    }
+
+    .select2-search--dropdown{
+        background-color: #191d21;
+    }
+    .select2-search__field{
+        background-color: #191d21;
+        color: #dee2e6 !important;
+        outline: none;
+    }
+
+    .select2-results { 
+        background-color: #191d21;
+    }
+
+    .daterangepicker {
+        .calendar-table {
+            background-color: #191d21 !important;
+            .next span, .prev span {
+                border: solid #eae1e1;
+                border-width: 0 2px 2px 0;
+            }
+        }
+        
+        th, td {
+            background-color: #191d21 !important;
+            &.in-range {
+                background-color: #1d3f4e !important;
+            }
+        }
+    }
+}

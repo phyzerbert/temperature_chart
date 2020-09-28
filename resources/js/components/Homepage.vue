@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="row filter mb-3">
-                <div class="col-md-3 mt-2">
+                <div class="col-lg-3 mt-2">
                     <date-range-picker
                         ref="daterangepicker"
                         :opens="'right'"
@@ -17,7 +17,7 @@
                     >
                     </date-range-picker>
                 </div>
-                <div class="col-md-5 mt-2">
+                <div class="col-lg-5 mt-2">
                     <div>
                         <multiselect 
                             v-model="selected_employee" 

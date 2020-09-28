@@ -15,3 +15,56 @@
   min-height: 36px !important;
 }
 
+.bootstrap-dark .reportrange-text {
+  background: #191d21 !important;
+}
+
+.bootstrap-dark .multiselect {
+  color: #dee2e6 !important;
+}
+
+.bootstrap-dark .multiselect__tags,
+.bootstrap-dark .multiselect__input,
+.bootstrap-dark .multiselect__single,
+.bootstrap-dark .multiselect__content-wrapper {
+  background: #191d21 !important;
+}
+
+.bootstrap-dark .select2-container--default .select2-selection--single {
+  background-color: #191d21;
+}
+
+.bootstrap-dark .select2-search--dropdown {
+  background-color: #191d21;
+}
+
+.bootstrap-dark .select2-search__field {
+  background-color: #191d21;
+  color: #dee2e6 !important;
+  outline: none;
+}
+
+.bootstrap-dark .select2-results {
+  background-color: #191d21;
+}
+
+.bootstrap-dark .daterangepicker .calendar-table {
+  background-color: #191d21 !important;
+}
+
+.bootstrap-dark .daterangepicker .calendar-table .next span,
+.bootstrap-dark .daterangepicker .calendar-table .prev span {
+  border: solid #eae1e1;
+  border-width: 0 2px 2px 0;
+}
+
+.bootstrap-dark .daterangepicker th,
+.bootstrap-dark .daterangepicker td {
+  background-color: #191d21 !important;
+}
+
+.bootstrap-dark .daterangepicker th.in-range,
+.bootstrap-dark .daterangepicker td.in-range {
+  background-color: #1d3f4e !important;
+}
+

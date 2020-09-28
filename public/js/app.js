@@ -76312,7 +76312,7 @@ var render = function() {
       _c("div", { staticClass: "row filter mb-3" }, [
         _c(
           "div",
-          { staticClass: "col-md-3 mt-2" },
+          { staticClass: "col-lg-3 mt-2" },
           [
             _c("date-range-picker", {
               ref: "daterangepicker",
@@ -76335,7 +76335,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-5 mt-2" }, [
+        _c("div", { staticClass: "col-lg-5 mt-2" }, [
           _c(
             "div",
             [

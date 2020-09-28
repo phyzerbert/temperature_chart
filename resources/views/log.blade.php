@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <form action="" class="form-inline">
                         @csrf
-                        <input type="text" name="period" class="form-control form-control-sm mr-3 mt-2" style="min-width: 210px;" autocomplete="off" id="period" value="{{$period}}" placeholder="Select Date">
+                        <input type="text" name="period" class="form-control form-control-sm mr-md-3 mt-2" style="min-width: 210px;" autocomplete="off" id="period" value="{{$period}}" placeholder="Select Date">
                         <select name="employee_id" id="search_employee" class="form-control form-control-sm mt-2">
                             <option value="">Select Employee</option>
                             @foreach ($employees as $item)

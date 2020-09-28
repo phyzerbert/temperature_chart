@@ -16,12 +16,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/toggle-bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toggle-bootstrap-dark.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body>
+<body class="bootstrap">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-themed shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -61,6 +64,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="javascript:;" class="dropdown-item" id="btn_change_theme">Dark Theme</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -87,5 +91,30 @@
         
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
+    <script>
+        $(document).ready(function () {
+            setTheme();
+            $("#btn_change_theme").click(function () {
+               let theme = localStorage.getItem("theme"); 
+               if(theme == 'light') {
+                    localStorage.setItem("theme", "dark");
+               } else {
+                    localStorage.setItem("theme", "light");
+               }
+               setTheme();
+            });
+
+            function setTheme() {
+                let theme = localStorage.getItem("theme"); 
+                if(theme == 'dark') {
+                    $("body").removeClass("bootstrap").addClass('bootstrap-dark');
+                    $("#btn_change_theme").text('Light Theme');
+                } else {
+                    $("body").removeClass("bootstrap-dark").addClass('bootstrap');
+                    $("#btn_change_theme").text('Dark Theme');
+                }
+            }
+        })
+    </script>
 </body>
 </html>

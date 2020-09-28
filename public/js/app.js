@@ -2039,6 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2072,6 +2073,11 @@ __webpack_require__.r(__webpack_exports__);
           _this.selected_employee = response.data.data[0];
         }
       });
+    },
+    nameWithCode: function nameWithCode(_ref) {
+      var name = _ref.name,
+          code = _ref.code;
+      return "".concat(name, " [").concat(code, "]");
     }
   }
 });
@@ -76340,6 +76346,7 @@ var render = function() {
                   selectLabel: "",
                   selectedLabel: "",
                   deselectLabel: "",
+                  "custom-label": _vm.nameWithCode,
                   label: "name",
                   "track-by": "name"
                 },

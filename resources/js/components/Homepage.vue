@@ -26,6 +26,7 @@
                             selectLabel=""
                             selectedLabel=""
                             deselectLabel=""
+                            :custom-label="nameWithCode"
                             label="name" 
                             track-by="name"
                         ></multiselect>
@@ -69,6 +70,9 @@
                     }
                 });
             },
+            nameWithCode ({ name, code }) {
+                return `${name} [${code}]`
+            }
         },
     }
 </script>

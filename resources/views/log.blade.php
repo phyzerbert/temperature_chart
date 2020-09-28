@@ -17,7 +17,7 @@
                         <select name="employee_id" id="search_employee" class="form-control form-control-sm mt-2">
                             <option value="">Select Employee</option>
                             @foreach ($employees as $item)
-                                <option value="{{$item->id}}" @if($item->id == $employee_id) selected @endif>{{$item->name}}</option>
+                                <option value="{{$item->id}}" @if($item->id == $employee_id) selected @endif>{{$item->name}} [{{$item->code}}]</option>
                             @endforeach
                         </select>
                         <button type="submit" class="btn btn-primary btn-sm mt-2 ml-2">Search</button>
@@ -71,10 +71,17 @@
             $("#period").dateRangePicker({
                 autoClose: false,
             });
+
             $("#btn_reset").click(function () {
                 $("#period").val('');
-                $("#search_employee").val('');
-            })
+                $("#search_employee").val('').change();
+            });
+
+            $('#search_employee').wrap('<div class="mt-2"></div>')
+            .select2({
+                width: 'resolve',
+                placeholder: 'Select Employee',
+            });
         });
     </script>
 @endsection

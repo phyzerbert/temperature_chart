@@ -5,9 +5,13 @@ namespace App\Imports;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToArray;
 
-use App\Employee;
+use App\User;
 use App\Temperature;
 use App\Tfile;
+use App\Setting;
+use App\Notification;
+
+use App\Events\DetectFever;
 
 class TemperaturesImport implements ToArray
 {
@@ -21,20 +25,32 @@ class TemperaturesImport implements ToArray
     }
     public function array(Array $rows)
     {   
+        $top_limit = Setting::find(1)->top_limit;
         array_shift($rows);
         foreach ($rows as $row) {
-            $employee = Employee::where('code', intval($row[2]))->first();
-            if(!$employee) {
-                $employee = Employee::create([
-                    'code' => intval($row[2]),
+            $user = User::where('employee_id', intval($row[2]))->first();
+            if(!$user) {
+                $user = User::create([
+                    'employee_id' => intval($row[2]),
                     'name' => trim($row[4], '"'),
+                    'role' => 'user',
                 ]);
             }
-            Temperature::create([
-                'employee_id' => $employee->id,
+            $temperature = Temperature::create([
+                'user_id' => $user->id,
                 'datetime' => $row[1],
                 'temperature' => $row[3]
             ]);
+
+            if($row[3] > $top_limit) {
+                $notification = Notification::create([
+                    'user_id' => $user->id,
+                    'temperature_id' => $temperature->id,
+                    'message' => '',
+                ]);
+                // event(new DetectFever($notification));
+            }
+
         }
 
         Tfile::create(['path' => $this->file_path]);

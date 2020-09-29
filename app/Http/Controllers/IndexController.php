@@ -13,22 +13,6 @@ use Excel;
 class IndexController extends Controller
 {
     
-    pu
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     public function check_files(Request $request) {
         $this->scanFiles();

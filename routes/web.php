@@ -20,5 +20,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/get_chart_data', 'HomeController@getChartData');
-Route::get('/employee/get_all', 'EmployeeController@getAll');
+Route::get('/user/get_all', 'UserController@getAll');
 Route::any('/log/index', 'HomeController@logs')->name('log.index');
+
+
+Route::any('/user/index', 'UserController@index')->name('user.index');
+Route::post('/user/create_admin', 'UserController@create_admin')->name('user.create_admin');
+Route::post('/user/update', 'UserController@update')->name('user.update');

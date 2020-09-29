@@ -1912,7 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Line"],
-  props: ['dateRange', 'employee'],
+  props: ['dateRange', 'user'],
   data: function data() {
     return {
       start_date: '2020-09-01',
@@ -1940,7 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   watch: {
-    employee: function employee(newEmployee, oldEmployee) {
+    user: function user(newUser, oldUser) {
       this.showChart();
     },
     dateRange: {
@@ -1963,7 +1963,7 @@ __webpack_require__.r(__webpack_exports__);
       var params = {
         start_date: start_date,
         end_date: end_date,
-        employee_id: this.employee.id
+        user_id: this.user.id
       };
       axios.post(uri, params).then(function (response) {
         _this.labels = response.data.labels;
@@ -2049,15 +2049,16 @@ __webpack_require__.r(__webpack_exports__);
     DateRangePicker: vue2_daterange_picker__WEBPACK_IMPORTED_MODULE_0___default.a,
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
   },
-  props: ['start_date', 'end_date', 'employee'],
+  props: ['start_date', 'end_date', 'user'],
   data: function data() {
     return {
-      selected_employee: this.employee,
-      employees: [],
+      selected_user: this.user,
+      users: [],
       dateRange: {
         startDate: this.start_date,
         endDate: this.end_date
-      }
+      },
+      auth_user: window.auth_user
     };
   },
   mounted: function mounted() {
@@ -2067,17 +2068,17 @@ __webpack_require__.r(__webpack_exports__);
     getEmployees: function getEmployees() {
       var _this = this;
 
-      axios.get('/employee/get_all').then(function (response) {
+      axios.get('/user/get_all').then(function (response) {
         if (response.data.status == 200) {
-          _this.employees = response.data.data;
-          _this.selected_employee = response.data.data[0];
+          _this.users = response.data.data;
+          _this.selected_user = response.data.data[0];
         }
       });
     },
-    nameWithCode: function nameWithCode(_ref) {
+    nameWithId: function nameWithId(_ref) {
       var name = _ref.name,
-          code = _ref.code;
-      return "".concat(name, " [").concat(code, "]");
+          employee_id = _ref.employee_id;
+      return "".concat(name, " [").concat(employee_id, "]");
     }
   }
 });
@@ -76335,33 +76336,47 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-5 mt-2" }, [
-          _c(
-            "div",
-            [
-              _c("multiselect", {
-                attrs: {
-                  options: _vm.employees,
-                  placeholder: "Select Employee",
-                  selectLabel: "",
-                  selectedLabel: "",
-                  deselectLabel: "",
-                  "custom-label": _vm.nameWithCode,
-                  label: "name",
-                  "track-by": "name"
-                },
-                model: {
-                  value: _vm.selected_employee,
-                  callback: function($$v) {
-                    _vm.selected_employee = $$v
-                  },
-                  expression: "selected_employee"
-                }
-              })
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.auth_user.role != "user",
+                expression: "auth_user.role != 'user'"
+              }
             ],
-            1
-          )
-        ])
+            staticClass: "col-lg-5 mt-2"
+          },
+          [
+            _c(
+              "div",
+              [
+                _c("multiselect", {
+                  attrs: {
+                    options: _vm.users,
+                    placeholder: "Select Employee",
+                    selectLabel: "",
+                    selectedLabel: "",
+                    deselectLabel: "",
+                    "custom-label": _vm.nameWithId,
+                    label: "name",
+                    "track-by": "name"
+                  },
+                  model: {
+                    value: _vm.selected_user,
+                    callback: function($$v) {
+                      _vm.selected_user = $$v
+                    },
+                    expression: "selected_user"
+                  }
+                })
+              ],
+              1
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -76369,7 +76384,7 @@ var render = function() {
         { staticClass: "chart-container" },
         [
           _c("chart-temperature", {
-            attrs: { dateRange: _vm.dateRange, employee: _vm.selected_employee }
+            attrs: { dateRange: _vm.dateRange, user: _vm.selected_user }
           })
         ],
         1

@@ -17,16 +17,16 @@
                     >
                     </date-range-picker>
                 </div>
-                <div class="col-lg-5 mt-2">
+                <div class="col-lg-5 mt-2" v-show="auth_user.role != 'user'">
                     <div>
                         <multiselect 
-                            v-model="selected_employee" 
-                            :options="employees"  
+                            v-model="selected_user" 
+                            :options="users"  
                             placeholder="Select Employee"
                             selectLabel=""
                             selectedLabel=""
                             deselectLabel=""
-                            :custom-label="nameWithCode"
+                            :custom-label="nameWithId"
                             label="name" 
                             track-by="name"
                         ></multiselect>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="chart-container">
-                <chart-temperature :dateRange="dateRange" :employee="selected_employee"></chart-temperature>
+                <chart-temperature :dateRange="dateRange" :user="selected_user"></chart-temperature>
             </div>
         </div>
     </div>
@@ -47,15 +47,16 @@
     export default {
         name: 'Homepage',
         components: { DateRangePicker, Multiselect },
-        props: ['start_date', 'end_date', 'employee'],
+        props: ['start_date', 'end_date', 'user'],
         data(){
             return {
-                selected_employee: this.employee,
-                employees: [],
+                selected_user: this.user,
+                users: [],
                 dateRange: {
                     startDate: this.start_date,
                     endDate: this.end_date
                 },
+                auth_user: window.auth_user,
             };
         },
         mounted(){
@@ -63,15 +64,15 @@
         },
         methods: {
             getEmployees() {
-                axios.get('/employee/get_all').then((response) => {
+                axios.get('/user/get_all').then((response) => {
                     if(response.data.status == 200) {
-                        this.employees = response.data.data;
-                        this.selected_employee = response.data.data[0];
+                        this.users = response.data.data;
+                        this.selected_user = response.data.data[0];
                     }
                 });
             },
-            nameWithCode ({ name, code }) {
-                return `${name} [${code}]`
+            nameWithId ({ name, employee_id }) {
+                return `${name} [${employee_id}]`
             }
         },
     }

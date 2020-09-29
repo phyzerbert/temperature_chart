@@ -21,6 +21,9 @@
     <link href="{{ asset('css/toggle-bootstrap-dark.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @yield('styles')
+    <script>
+        window.auth_user = {!! auth()->user() !!};
+    </script>
 </head>
 <body class="bootstrap">
     <div id="app">
@@ -46,17 +49,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            {{-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif --}}
                         @else
+                            @if (Auth::user()->role != 'user')
+                                <li class="nav-item">
+                                    <a href="{{route('user.index')}}" class="nav-link">User Management</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('log.index')}}" class="nav-link">Log</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <a href="{{route('home')}}" class="nav-link">Chart</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('log.index')}}" class="nav-link">Log</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

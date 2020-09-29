@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Employee;
+use App\User;
 use App\Temperature;
 
 use Carbon\Carbon;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -31,13 +32,17 @@ class HomeController extends Controller
         $now = Carbon::now();
         $start_date = $now->startOfWeek()->format('Y-m-d');
         $end_date = $now->endOfWeek()->format('Y-m-d');
-        $employee = Employee::orderBy('name')->first();
-        
-        return view('home', compact('start_date', 'end_date', 'employee'));
+        if(Auth::user()->role == 'user') {
+            $user = Auth::user();
+        } else {
+            $user = User::orderBy('name')->first();
+        }
+
+        return view('home', compact('start_date', 'end_date', 'user'));
     }
 
     public function getChartData(Request $request) {
-        $employee = Employee::find($request->get('employee_id'));
+        $user = User::find($request->get('user_id'));
         $chart_start = Carbon::createFromFormat('Y-m-d', $request->get('start_date'));
         $chart_end = Carbon::createFromFormat('Y-m-d', $request->get('end_date'));
         
@@ -47,7 +52,7 @@ class HomeController extends Controller
             $key = $dt->format('Y-m-d');
             $label = $dt->format('M/d');
             array_push($labels, $label);
-            $daily_temperature = $employee->temperatures()->whereDate('datetime', $key)->avg('temperature');
+            $daily_temperature = $user->temperatures()->whereDate('datetime', $key)->avg('temperature');
             $daily_temperature = number_format($daily_temperature, 2);
             array_push($temperature_data, $daily_temperature);
         }
@@ -63,19 +68,19 @@ class HomeController extends Controller
 
     public function logs(Request $request) {
         $mod = new Temperature();
-        $employees = Employee::orderBy('name')->get();
-        $period = $employee_id = '';
+        $users = User::where('role', 'user')->orderBy('name')->get();
+        $period = $user_id = '';
         if($request->get('period') != '') {
             $period = $request->get('period');
             $from = substr($period, 0, 10);
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('datetime', [$from, $to]);
         }
-        if($request->get('employee_id') != '') {
-            $employee_id = $request->get('employee_id');
-            $mod = $mod->where('employee_id', $employee_id);
+        if($request->get('user_id') != '') {
+            $user_id = $request->get('user_id');
+            $mod = $mod->where('user_id', $user_id);
         }
         $data = $mod->orderBy('datetime', 'desc')->paginate(15);
-        return view('log', compact('data', 'employees', 'period', 'employee_id'));
+        return view('log', compact('data', 'users', 'period', 'user_id'));
     }
 }

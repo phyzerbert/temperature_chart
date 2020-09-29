@@ -2,7 +2,7 @@
     import { Line } from 'vue-chartjs'
     export default {
         extends: Line,
-        props: ['dateRange', 'employee'],
+        props: ['dateRange', 'user'],
         data(){
             return {
                 start_date: '2020-09-01',
@@ -30,7 +30,7 @@
             };
         },
         watch: {
-            employee(newEmployee, oldEmployee) {
+            user(newUser, oldUser) {
                 this.showChart();
             },
             dateRange : {
@@ -51,7 +51,7 @@
                 let params = {
                     start_date: start_date,
                     end_date: end_date,
-                    employee_id: this.employee.id,
+                    user_id: this.user.id,
                 }
                 axios.post(uri, params).then((response) => {
                     this.labels = response.data.labels;

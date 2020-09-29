@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <homepage start_date="{{$start_date}}" end_date="{{$end_date}}" :employee="{{$employee}}"></homepage>
+            <homepage start_date="{{$start_date}}" end_date="{{$end_date}}" :user="{{$user}}"></homepage>
         </div>
     </div>
 </div>

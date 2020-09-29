@@ -43,10 +43,11 @@ class TemperaturesImport implements ToArray
             ]);
 
             if($row[3] > $top_limit) {
+                $message = $user->name . " has a high fever of " . number_format($temperature->temperature, 2);
                 $notification = Notification::create([
                     'user_id' => $user->id,
                     'temperature_id' => $temperature->id,
-                    'message' => '',
+                    'message' => $message,
                 ]);
                 // event(new DetectFever($notification));
             }

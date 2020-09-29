@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Temperature;
+use App\Setting;
+use App\Notification;
 
 use Carbon\Carbon;
 use Auth;
@@ -82,5 +84,23 @@ class HomeController extends Controller
         }
         $data = $mod->orderBy('datetime', 'desc')->paginate(15);
         return view('log', compact('data', 'users', 'period', 'user_id'));
+    }
+
+    public function setting(Request $request) {
+        $setting = Setting::find(1);
+        return view('setting', compact('setting'));
+    }
+
+    public function setting_update(Request $request) {
+        $setting->Setting::find(1);
+        $setting->update([
+            'top_limit' => $request->get('top_limit'),
+        ]);
+        return back()->with('success', 'Updated Successfully!');
+    }
+
+    public function notification(Request $request) {
+        $data = Notification::orderBy('created_at', 'desc')->paginate(15);
+        return view('notification', compact('data'));
     }
 }

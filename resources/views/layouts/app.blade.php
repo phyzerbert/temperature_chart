@@ -52,6 +52,9 @@
                         @else
                             @if (Auth::user()->role != 'user')
                                 <li class="nav-item">
+                                    <a href="{{route('setting.index')}}" class="nav-link">Setting</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{route('user.index')}}" class="nav-link">User Management</a>
                                 </li>
                                 <li class="nav-item">
@@ -61,6 +64,22 @@
                             <li class="nav-item">
                                 <a href="{{route('home')}}" class="nav-link">Chart</a>
                             </li>
+                            @if (Auth::user()->role != 'user')
+                                <li class="nav-item">
+                                    <a href="{{route('notification.index')}}" class="nav-link">
+                                        <img src="{{asset('/images/notification.png')}}" width="25" alt="">
+                                    </a>
+                                </li>
+                                {{-- <li class="nav-item dropdown">
+                                    <a id="notificationDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <img src="{{asset('/images/notification.png')}}" width="25" alt="">
+                                        <span class="badge badge-warning badge-pill" id="count_notification" style="display: none">0</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="dropdown_notification">
+                                        <a class="dropdown-item" href="{{route('notification.index')}}">View All Notifications</a>
+                                    </div>
+                                </li> --}}
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

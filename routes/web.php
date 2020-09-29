@@ -27,3 +27,8 @@ Route::any('/log/index', 'HomeController@logs')->name('log.index');
 Route::any('/user/index', 'UserController@index')->name('user.index');
 Route::post('/user/create_admin', 'UserController@create_admin')->name('user.create_admin');
 Route::post('/user/update', 'UserController@update')->name('user.update');
+
+Route::get('/setting/index', 'HomeController@setting')->name('setting.index');
+Route::post('/setting/update', 'HomeController@setting_update')->name('setting.update');
+
+Route::get('/notification/index', 'HomeController@notification')->name('notification.index');

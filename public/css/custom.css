@@ -75,3 +75,24 @@
   background-color: #1d3f4e !important;
 }
 
+#count_notification {
+  position: absolute;
+  right: 8px;
+  font-size: 11px;
+  padding: 3px 5px;
+}
+
+#notificationDropdown::after {
+  display: none;
+}
+
+#dropdown_notification {
+  max-width: 300px;
+}
+
+@media (max-width: 600px) {
+  #dropdown_notification {
+    max-width: 100%;
+  }
+}
+

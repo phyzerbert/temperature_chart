@@ -43,14 +43,21 @@ class ScanFiles extends Command
      */
     public function handle()
     {
-        $all_directories = File::directories(public_path('csv'));
-        foreach ($all_directories as $directory) {
-            $dir_name = basename($directory);
-            $files = File::files(public_path('csv'."/".$dir_name));
-            foreach ($files as $file) {
-                $file_path = $dir_name."/".basename($file);
-                if(!Tfile::where('path', $file_path)->exists()) {
-                    Excel::import(new TemperaturesImport($file_path), public_path('csv/'.$file_path));  
+        ini_set('max_execution_time', '0');
+        $entrance_directories = File::directories(public_path('csv'));
+        foreach ($entrance_directories as $entrance) {
+            $entrance_name = basename($entrance);
+            $date_directories = File::directories(public_path('csv/'.$entrance_name.'/logs'));
+            
+            foreach ($date_directories as $directory) {
+                $dir_path = $entrance_name.'/logs/'.basename($directory);
+                $files = File::files(public_path('csv/'.$dir_path));
+                foreach ($files as $file) {
+                    $file_path = $dir_path."/".basename($file);
+                    $extension = pathinfo(basename($file), PATHINFO_EXTENSION);
+                    if(!Tfile::where('path', $file_path)->exists() && $extension == 'csv') {
+                        Excel::import(new TemperaturesImport($file_path, $entrance_name), public_path('csv/'.$file_path));  
+                    }
                 }
             }
         }

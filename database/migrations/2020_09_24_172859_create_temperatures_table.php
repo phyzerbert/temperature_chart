@@ -17,7 +17,8 @@ class CreateTemperaturesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->nullable();
             $table->timestamp('datetime')->nullable();
-            $table->decimal('temperature', 4, 2)->default(36.5);
+            $table->string('entrance')->nullable();
+            $table->decimal('temperature', 4, 2)->default(36.5)->nullable();
             $table->timestamps();
         });
     }

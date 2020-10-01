@@ -76360,9 +76360,8 @@ var render = function() {
                     selectLabel: "",
                     selectedLabel: "",
                     deselectLabel: "",
-                    "custom-label": _vm.nameWithId,
-                    label: "name",
-                    "track-by": "name"
+                    label: "employee_id",
+                    "track-by": "employee_id"
                   },
                   model: {
                     value: _vm.selected_user,

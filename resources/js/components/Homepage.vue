@@ -26,10 +26,10 @@
                             selectLabel=""
                             selectedLabel=""
                             deselectLabel=""
-                            :custom-label="nameWithId"
-                            label="name" 
-                            track-by="name"
+                            label="employee_id" 
+                            track-by="employee_id"
                         ></multiselect>
+                            <!-- :custom-label="nameWithId" -->
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 });
             },
             nameWithId ({ name, employee_id }) {
-                return `${name} [${employee_id}]`
+                return `${name} [${employee_id}]`;
             }
         },
     }

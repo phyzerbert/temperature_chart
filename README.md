@@ -6,7 +6,7 @@
     - mysql -u root -p
     - create database temperature;
     - \q
-    
+
 - Run 'npm install'
 - Run 'npm run dev'
 
@@ -30,5 +30,5 @@
 - SuperAdmin username: superadmin
 - SuperAdmin Password: 123456
 
-- Admin username: superadmin
+- Admin username: admin1
 - Admin Password: 123456

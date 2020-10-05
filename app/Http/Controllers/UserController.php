@@ -71,5 +71,12 @@ class UserController extends Controller
         return back()->with('success', 'Updated Successfully!');        
     }
 
+    public function delete($id) {
+        $item = User::find($id);
+        $item->temperatures()->delete();
+        $item->delete();
+        return back()->with('success', 'Deleted Successfully!');
+    }
+
 
 }

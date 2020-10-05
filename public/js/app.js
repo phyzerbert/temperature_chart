@@ -2040,6 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2078,7 +2079,8 @@ __webpack_require__.r(__webpack_exports__);
     nameWithId: function nameWithId(_ref) {
       var name = _ref.name,
           employee_id = _ref.employee_id;
-      return "".concat(name, " [").concat(employee_id, "]");
+      var employee_name = name ? name : '';
+      return "".concat(employee_name, " [").concat(employee_id, "]");
     }
   }
 });
@@ -76360,8 +76362,9 @@ var render = function() {
                     selectLabel: "",
                     selectedLabel: "",
                     deselectLabel: "",
-                    label: "employee_id",
-                    "track-by": "employee_id"
+                    "custom-label": _vm.nameWithId,
+                    label: "name",
+                    "track-by": "name"
                   },
                   model: {
                     value: _vm.selected_user,

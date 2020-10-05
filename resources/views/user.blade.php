@@ -42,6 +42,9 @@
                                         </td>
                                         <td class="py-2">
                                             <button type="button" class="btn btn-info btn-sm btn-edit" data-id="{{$item->id}}">Edit</button>
+                                            @if (Auth::user()->role == 'super_admin')
+                                                <a href="{{route('user.delete', $item->id)}}" class="btn btn-danger btn-sm btn-delete" onclick="return window.confirm('Are you sure?')" >Delete</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

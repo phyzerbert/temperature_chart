@@ -23,6 +23,7 @@
     - You can add many enterance folders and date folders
 - Configuration Crontab
     - 0 * * * * cd "path of project root folder"  && php artisan scan:files
+    - 0 8 * * 0 cd "path of project root folder"  && php artisan scan:employees
 - Run 'php artisan scan:files'
 - Run 'php artisan serve'
 - Start server at http://localhost:8000

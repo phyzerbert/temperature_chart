@@ -15,6 +15,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <th style="width: 50px">No</th>
+                                <th>User</th>
                                 <th>Date & Time</th>
                                 <th>Notification</th>
                             </thead>
@@ -22,6 +23,7 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
+                                        <td>{{$item->user->name ?? ''}} [{{$item->user->employee_id ?? ''}}]</td>
                                         <td>{{$item->temperature->datetime}}</td>
                                         <td>{{$item->message}}</td>
                                     </tr>

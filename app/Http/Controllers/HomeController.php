@@ -92,7 +92,7 @@ class HomeController extends Controller
     }
 
     public function setting_update(Request $request) {
-        $setting->Setting::find(1);
+        $setting = Setting::find(1);
         $setting->update([
             'top_limit' => $request->get('top_limit'),
         ]);

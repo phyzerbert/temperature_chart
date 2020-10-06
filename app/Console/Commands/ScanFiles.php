@@ -55,7 +55,7 @@ class ScanFiles extends Command
                 foreach ($files as $file) {
                     $file_path = $dir_path."/".basename($file);
                     $extension = pathinfo(basename($file), PATHINFO_EXTENSION);
-                    if(!Tfile::where('path', $file_path)->exists() && $extension == 'csv') {
+                    if($extension == 'csv' && !Tfile::where('path', $file_path)->exists()) {
                         Excel::import(new TemperaturesImport($file_path, $entrance_name), public_path('csv/'.$file_path));  
                     }
                 }

@@ -7,11 +7,14 @@ use Maatwebsite\Excel\Concerns\ToArray;
 
 use App\User;
 
+use DB;
+
 class LenelImport implements ToArray
 {
     public function array(Array $rows)
     {
         array_shift($rows);
+        DB::beginTransaction();
         foreach ($rows as $row) {
             $user = User::where('employee_id', intval($row[0]))->first();
             if(!$user) {
@@ -26,5 +29,6 @@ class LenelImport implements ToArray
                 ]);
             }
         }
+        DB::commit();
     }
 }
